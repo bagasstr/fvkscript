@@ -13,7 +13,7 @@
 	let isCopied = $state(false);
 
 	// The current key should be the first one in the list (most recent)
-	let currentKey = $derived(data.userKeys?.[0] || null);
+	let currentKey = $derived(form?.newKey || data.userKeys?.[0] || null);
 
 	import { addToast } from '$lib/toast.svelte';
 	import { onMount } from 'svelte';
@@ -148,8 +148,11 @@
                             use:enhance={() => {
                                 isGenerating = true;
                                 return async ({ update }) => {
-                                    await update();
-                                    isGenerating = false;
+                                    try {
+                                        await update();
+                                    } finally {
+                                        isGenerating = false;
+                                    }
                                 };
                             }}
                         >

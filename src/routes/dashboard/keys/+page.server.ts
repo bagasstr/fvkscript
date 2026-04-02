@@ -64,15 +64,18 @@ export const actions = {
         // Expiry date for free keys
         const expiryDate = isPremium ? null : new Date(Date.now() + 24 * 60 * 60 * 1000);
 
-        await db.insert(keys).values({
+        const newKey = {
             id: randomUUID(),
             userId: session.user.id,
             code: newKeyCode,
             type: userData.plan || "free",
             status: "active",
-            expiryDate: expiryDate
-        });
+            expiryDate: expiryDate,
+            createdAt: new Date()
+        };
 
-        return { success: true };
+        await db.insert(keys).values(newKey);
+
+        return { success: true, newKey };
     }
 };
