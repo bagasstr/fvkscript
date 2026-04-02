@@ -112,6 +112,7 @@
                             <p class="text-[9px] font-black text-zinc-500 uppercase tracking-[0.4em]">MANDATORY AD-LINK VERIFICATION REQUIRED</p>
                             <Button 
                                 href="/api/v1/ads/start"
+                                data-sveltekit-reload
                                 class="h-16 w-full max-w-xs mx-auto rounded-2xl bg-linear-to-r from-orange-600 to-red-600 text-white hover:scale-105 transition-all text-[11px] font-black uppercase tracking-[0.3em] shadow-2xl border-none"
                             >
                                 <Sparkles class="h-4 w-4 mr-2" />
