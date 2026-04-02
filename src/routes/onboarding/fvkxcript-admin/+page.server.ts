@@ -31,7 +31,7 @@ export const actions = {
                 await db.update(user)
                     .set({ 
                         role: 'admin', 
-                        plan: 'founder' 
+                        plan: 'admin' 
                     })
                     .where(eq(user.id, result.user.id));
 
