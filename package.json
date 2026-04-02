@@ -21,7 +21,6 @@
 		"auth:schema": "better-auth generate --config src/lib/server/auth.ts --output src/lib/server/db/auth.schema.ts --yes"
 	},
 	"devDependencies": {
-		"@sveltejs/adapter-vercel": "latest",
 		"@better-auth/cli": "latest",
 		"@fontsource-variable/inter": "^5.2.8",
 		"@lucide/svelte": "^1.3.0",
