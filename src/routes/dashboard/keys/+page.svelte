@@ -6,6 +6,8 @@
 
 	let { data, form } = $props();
 	const userPlan = $derived(data.user?.plan || 'free');
+	const userRole = $derived(data.user?.role || 'user');
+    const isBypassed = $derived(userPlan !== 'free' || userRole === 'admin');
 
 	let isGenerating = $state(false);
 	let isCopied = $state(false);
@@ -58,7 +60,7 @@
 	    <!-- Main Generator Card -->
 	<div class="relative group">
         <!-- Decoration FX -->
-        <div class="absolute -inset-1 bg-linear-to-r from-cyan-600/20 to-purple-600/20 rounded-[3rem] blur-xl opacity-0 group-hover:opacity-100 transition-opacity {userPlan !== 'free' || data.isAdVerified ? 'opacity-30' : ''}"></div>
+        <div class="absolute -inset-1 bg-linear-to-r from-cyan-600/20 to-purple-600/20 rounded-[3rem] blur-xl opacity-0 group-hover:opacity-100 transition-opacity {isBypassed || data.isAdVerified ? 'opacity-30' : ''}"></div>
         
         <div class="relative bg-[#080808]/80 border border-white/5 backdrop-blur-3xl rounded-[3rem] p-12 shadow-2xl text-center space-y-10 overflow-hidden">
             {#if !currentKey && !isGenerating}
@@ -89,7 +91,7 @@
                 <!-- Key Display State -->
                 <div class="py-4 space-y-10" in:scale={{ start: 0.9 }}>
                     <div class="space-y-4">
-                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg {currentKey.type !== 'free' ? 'bg-cyan-500/10 text-cyan-500' : 'bg-zinc-500/10 text-zinc-500'} text-[9px] font-black uppercase tracking-widest border border-current">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg {!isBypassed ? 'bg-zinc-500/10 text-zinc-500' : 'bg-cyan-500/10 text-cyan-500'} text-[9px] font-black uppercase tracking-widest border border-current">
                             <ShieldCheck class="h-3 w-3" />
                             {currentKey.type.toUpperCase()} ACCESS
                         </div>
@@ -125,7 +127,7 @@
 
             {#if !isGenerating}
                 <div class="pt-6 border-t border-white/5 space-y-4">
-                    {#if userPlan === 'free' && !data.isAdVerified}
+                    {#if !isBypassed && !data.isAdVerified}
                         <!-- WATCH ADS BUTTON FOR FREE USERS -->
                         <div class="space-y-4">
                             <p class="text-[9px] font-black text-zinc-500 uppercase tracking-[0.4em]">MANDATORY AD-LINK VERIFICATION REQUIRED</p>
@@ -153,7 +155,7 @@
                         >
                             <button 
                                 type="submit"
-                                class="text-[10px] font-black uppercase tracking-[0.4em] {userPlan !== 'free' ? 'text-cyan-500' : 'text-emerald-500'} hover:scale-105 transition-all flex items-center justify-center mx-auto gap-3"
+                                class="text-[10px] font-black uppercase tracking-[0.4em] {isBypassed ? 'text-cyan-500' : 'text-emerald-500'} hover:scale-105 transition-all flex items-center justify-center mx-auto gap-3"
                             >
                                 <RefreshCcw class="h-3 w-3" />
                                 {currentKey ? 'REGENERATE PROTOCOL KEY' : 'INITIALIZE KEY GENERATION'}

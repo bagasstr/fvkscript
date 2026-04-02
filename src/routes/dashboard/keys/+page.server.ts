@@ -22,14 +22,7 @@ export const load = async (event) => {
         orderBy: [desc(keys.createdAt)],
     });
 
-    // Check if free user is currently verified (last 24h)
-    let isAdVerified = false;
-    if (userData?.adVerifiedAt) {
-        const hoursSinceVerified = (Date.now() - new Date(userData.adVerifiedAt).getTime()) / (1000 * 60 * 60);
-        if (hoursSinceVerified < 24) {
-            isAdVerified = true;
-        }
-    }
+    const isAdVerified = (userData?.plan === "premium" || userData?.plan === "founder" || userData?.role === "admin") ? true : (userData?.adVerifiedAt ? ((Date.now() - new Date(userData.adVerifiedAt).getTime()) / (1000 * 60 * 60) < 24) : false);
 
     return { 
         userKeys, 
@@ -52,7 +45,7 @@ export const actions = {
 
         if (!userData) return fail(404, { message: "User not found" });
 
-        const isPremium = userData.plan === "premium" || userData.plan === "founder";
+        const isPremium = userData.plan === "premium" || userData.plan === "founder" || userData.role === "admin";
         
         // Validation for free users
         if (!isPremium) {
