@@ -34,6 +34,7 @@
 	} from '@lucide/svelte';
     import { fade, fly } from 'svelte/transition';
     import { addToast } from '$lib/toast.svelte';
+    import logo from '$lib/assets/favicon.png';
 
     let { data } = $props();
 
@@ -113,8 +114,8 @@
 	<nav class="fixed top-0 z-50 w-full border-b border-white/[0.03] bg-black/60 backdrop-blur-lg">
 		<div class="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
 			<div class="flex items-center gap-3">
-				<div class="flex h-10 w-10 items-center justify-center rounded-xl bg-linear-to-br from-cyan-500 to-blue-600 shadow-[0_0_20px_rgba(34,211,238,0.2)]">
-					<Terminal class="h-6 w-6 text-white" />
+				<div class="flex h-10 w-10 items-center justify-center rounded-xl bg-white/5 border border-white/10 p-2">
+					<img src={logo} alt="FVKHUB LOGO" class="h-full w-full object-contain" />
 				</div>
                 <span class="text-xl font-black uppercase italic tracking-tighter text-white">FVK<span class="text-cyan-500">HUB</span></span>
 			</div>
@@ -444,7 +445,7 @@
 			<div class="flex flex-col items-center justify-between gap-12 md:flex-row text-center md:text-left">
                 <div class="flex flex-col gap-4">
                     <div class="flex items-center justify-center md:justify-start gap-3">
-                        <Terminal class="h-6 w-6 text-cyan-500" />
+                        <img src={logo} alt="FVKHUB LOGO" class="h-6 w-6 object-contain" />
                         <span class="text-lg font-black uppercase italic tracking-tighter text-white">FVK<span class="text-cyan-500">HUB</span></span>
                     </div>
                 </div>

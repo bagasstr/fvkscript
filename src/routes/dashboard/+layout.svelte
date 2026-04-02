@@ -25,6 +25,7 @@
 	import { authClient } from '$lib/auth-client';
     import { goto } from '$app/navigation';
     import { navigating } from '$app/state';
+    import logo from '$lib/assets/favicon.png';
 
 	let { data, children } = $props();
     let isMobileSidebarOpen = $state(false);
@@ -92,8 +93,8 @@
             <div class="p-8 flex-1">
                 <div class="flex items-center justify-between mb-12">
                     <div class="flex items-center gap-3">
-                        <div class="h-10 w-10 flex items-center justify-center rounded-xl bg-linear-to-br from-cyan-500 to-blue-600 shadow-[0_0_20px_rgba(34,211,238,0.2)]">
-                            <Terminal class="h-5 w-5 text-white" />
+                        <div class="h-10 w-10 flex items-center justify-center rounded-xl bg-white/5 border border-white/10 p-2">
+                            <img src={logo} alt="FVKHUB LOGO" class="h-full w-full object-contain" />
                         </div>
                         <span class="text-xl font-black uppercase italic tracking-tighter text-white">FVKHUB</span>
                     </div>
@@ -137,8 +138,8 @@
 			<div class="flex items-center gap-3 mb-16 px-2">
 				<div class="relative group">
                     <div class="absolute -inset-2 bg-cyan-600/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
-                    <div class="relative flex h-10 w-10 items-center justify-center rounded-xl bg-linear-to-br from-cyan-500 to-blue-600 shadow-[0_0_20px_rgba(34,211,238,0.2)]">
-                        <Terminal class="h-5 w-5 text-white" />
+                    <div class="relative flex h-10 w-10 items-center justify-center rounded-xl bg-white/5 border border-white/10 p-2 transition-all group-hover:border-cyan-500/30">
+                        <img src={logo} alt="FVKHUB LOGO" class="h-full w-full object-contain" />
                     </div>
                 </div>
                 <span class="text-xl font-black uppercase italic tracking-tighter text-white">FVK<span class="text-cyan-500 font-black">HUB</span></span>

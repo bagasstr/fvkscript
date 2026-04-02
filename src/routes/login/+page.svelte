@@ -20,6 +20,7 @@
 	import { fade, fly } from 'svelte/transition';
 	import { page } from '$app/state';
     import { addToast } from '$lib/toast.svelte';
+    import logo from '$lib/assets/favicon.png';
 
     let plan = $state("free");
 	let mode = $derived(page.url.searchParams.get('mode'));
@@ -129,11 +130,11 @@
 			<!-- Header -->
 			<div class="space-y-4 text-center">
 				<div
-					class="mx-auto flex h-20 w-20 -rotate-6 transform items-center justify-center rounded-3xl bg-linear-to-br from-cyan-600 to-blue-700 shadow-2xl shadow-cyan-900/40 transition-transform hover:rotate-0"
+					class="mx-auto flex h-24 w-24 -rotate-6 transform items-center justify-center rounded-[2.5rem] bg-white/5 border border-white/10 p-5 shadow-2xl shadow-cyan-900/40 transition-transform hover:rotate-0"
 				>
-					<ShieldCheck class="h-10 w-10 text-white" />
+					<img src={logo} alt="FVKHUB LOGO" class="h-full w-full object-contain" />
 				</div>
-				<h1 class="mt-8 text-4xl font-black tracking-tighter text-white uppercase italic">
+				<h1 class="mt-10 text-5xl font-black tracking-tighter text-white uppercase italic">
 					FVKHUB <span class="text-cyan-500">PORTAL.</span>
 				</h1>
 				<p class="text-[10px] font-black tracking-[0.4em] text-zinc-600 uppercase">
