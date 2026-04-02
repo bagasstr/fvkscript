@@ -19,14 +19,23 @@
 	} from '@lucide/svelte';
 	import { fade, fly } from 'svelte/transition';
 	import { page } from '$app/state';
+    import { addToast } from '$lib/toast.svelte';
 
-	// Force all plans to 'free' as payment gateway is not integrated yet
-	let plan = 'free';
+    let plan = $state("free");
 	let mode = $derived(page.url.searchParams.get('mode'));
 
 	let isSignUp = $state(false);
 
 	$effect(() => {
+        const p = page.url.searchParams.get('plan');
+        if (p === 'admin') {
+            plan = 'admin';
+        } else if (p === 'premium' || p === 'founder') {
+            addToast('paket ini belum tersedia', 'error');
+            plan = 'free';
+        } else {
+            plan = p || 'free';
+        }
 		if (mode === 'signup') isSignUp = true;
 	});
 	let email = $state('');
@@ -97,13 +106,10 @@
 		}
 	}
 
-	const planData: Record<string, { label: string; color: string; icon: any }> = {
-		free: {
-			label: 'FREE ACCESS',
-			color: 'text-zinc-500 border-zinc-500/20 bg-zinc-500/5',
-			icon: Key
-		}
-	};
+    const planData: Record<string, { label: string, color: string, icon: any }> = {
+        free: { label: 'FREE ACCESS', color: 'text-zinc-500 border-zinc-500/20 bg-zinc-500/5', icon: Key },
+        admin: { label: 'ADMIN ACCESS', color: 'text-orange-500 border-orange-500/20 bg-orange-500/5', icon: ShieldCheck }
+    };
 </script>
 
 <div
@@ -190,13 +196,11 @@
 								{@const Icon = planData[plan].icon}
 								<Icon class="mr-4 h-4 w-4 shrink-0" />
 								<span class="text-[11px] font-black tracking-[0.2em] uppercase"
-									>{planData[plan].label} SELECTED</span
-								>
+									>{planData[plan].label} SELECTED</span>
 							{:else}
 								<Key class="mr-4 h-4 w-4 shrink-0" />
 								<span class="text-[11px] font-black tracking-[0.2em] uppercase"
-									>FREE ACCESS SELECTED</span
-								>
+									>FREE ACCESS SELECTED</span>
 							{/if}
 						</div>
 					</div>

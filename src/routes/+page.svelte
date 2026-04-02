@@ -33,6 +33,7 @@
         Key
 	} from '@lucide/svelte';
     import { fade, fly } from 'svelte/transition';
+    import { addToast } from '$lib/toast.svelte';
 
     let { data } = $props();
 
@@ -246,7 +247,7 @@
                                 <Lock class="h-10 w-10" />
                             </div>
                             <h2 class="text-3xl font-black italic uppercase tracking-tighter text-white">THE FINAL BYPASS.</h2>
-                            <Button size="lg" onclick={() => alert('paket ini belum tersedia')} class="mt-6 h-14 w-full bg-white text-[11px] font-black uppercase tracking-[0.3em] text-black hover:bg-zinc-200 transition-all">
+                            <Button size="lg" onclick={() => addToast('paket ini belum tersedia', 'error')} class="mt-6 h-14 w-full bg-white text-[11px] font-black uppercase tracking-[0.3em] text-black hover:bg-zinc-200 transition-all">
                                 UPGRADE TO PREMIUM
                             </Button>
                         </div>
@@ -304,7 +305,7 @@
                                     </li>
                                 {/each}
                             </ul>
-                            <Button onclick={() => alert('paket ini belum tersedia')} class="w-full h-16 bg-cyan-500 text-black rounded-2xl text-[10px] font-black uppercase tracking-widest shadow-2xl hover:bg-cyan-400">
+                            <Button onclick={() => addToast('paket ini belum tersedia', 'error')} class="w-full h-16 bg-cyan-500 text-black rounded-2xl text-[10px] font-black uppercase tracking-widest shadow-2xl hover:bg-cyan-400">
                                 UPGRADE TO PREMIUM
                             </Button>
                         </div>
@@ -325,7 +326,7 @@
                                     </li>
                                 {/each}
                             </ul>
-                            <Button onclick={() => alert('paket ini belum tersedia')} class="w-full h-14 bg-purple-900/20 border border-purple-500/20 text-white rounded-2xl text-[9px] font-black uppercase tracking-widest hover:bg-purple-600">
+                            <Button onclick={() => addToast('paket ini belum tersedia', 'error')} class="w-full h-14 bg-purple-900/20 border border-purple-500/20 text-white rounded-2xl text-[9px] font-black uppercase tracking-widest hover:bg-purple-600">
                                 UNLOCK LIFETIME STATUS
                             </Button>
                         </div>

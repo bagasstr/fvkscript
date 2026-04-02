@@ -13,6 +13,7 @@
 	import { fade } from 'svelte/transition';
     import { LOADER_TEMPLATE } from '$lib/loader-template';
     import { page } from '$app/state';
+    import { addToast } from '$lib/toast.svelte';
 
     let { data } = $props();
 
@@ -43,7 +44,7 @@
             .replace('http://localhost:5173', origin);
             
         navigator.clipboard.writeText(finalLoader);
-        alert('Loader Code Copied to Clipboard!');
+        addToast('Loader Code Copied to Clipboard!', 'success');
     }
 </script>
 
