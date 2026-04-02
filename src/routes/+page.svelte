@@ -247,7 +247,7 @@
                             </div>
                             <h2 class="text-3xl font-black italic uppercase tracking-tighter text-white">THE FINAL BYPASS.</h2>
                             <Button size="lg" href="/login" class="mt-6 h-14 w-full bg-white text-[11px] font-black uppercase tracking-[0.3em] text-black hover:bg-zinc-200 transition-all">
-                                UPGRADE TO PREMIUM
+                                GET STARTED FOR FREE
                             </Button>
                         </div>
                     </div>
@@ -266,9 +266,9 @@
                     <p class="text-[10px] font-black uppercase tracking-[0.6em] text-zinc-600">Secure your session node access level today.</p>
                 </div>
 
-                <div class="grid gap-8 lg:grid-cols-3 max-w-6xl mx-auto">
+                <div class="flex justify-center max-w-6xl mx-auto">
                     <!-- Free Card -->
-                    <div class="group relative bg-black/40 border border-white/5 p-8 rounded-[2.5rem] transition-all hover:border-white/10 hover:bg-zinc-900/40">
+                    <div class="group relative bg-black/40 border border-white/5 p-8 rounded-[2.5rem] transition-all hover:border-white/10 hover:bg-zinc-900/40 max-w-md mx-auto w-full">
                         <div class="space-y-10">
                             <div class="flex items-center justify-between">
                                 <div class="h-12 w-12 rounded-xl bg-white/5 flex items-center justify-center text-zinc-600"><Key class="h-6 w-6" /></div>
@@ -276,7 +276,7 @@
                             </div>
                             <div><h3 class="text-2xl font-black italic text-white uppercase tracking-tighter">FREE ACCESS</h3><p class="mt-2 text-[10px] font-bold text-zinc-600 uppercase leading-relaxed">Mandatory ad-link verification for basic users.</p></div>
                             <ul class="space-y-4">
-                                {#each ['24h Key Validator', '3-Step Ad Verification', 'Support Basic Bypass'] as feat}
+                                {#each ['24h Key Validator', '3-Step Ad Verification', 'Support Basic Bypass', 'Elite Script Library'] as feat}
                                     <li class="flex items-center gap-3 text-[10px] font-black uppercase tracking-widest text-zinc-500">
                                         <div class="h-1 w-1 rounded-full bg-cyan-600"></div> {feat}
                                     </li>
@@ -284,49 +284,6 @@
                             </ul>
                             <Button href="/login?plan=free&mode=signup" class="w-full h-14 bg-white/5 border border-white/10 text-white rounded-2xl text-[9px] font-black uppercase tracking-widest hover:bg-white hover:text-black">
                                 GENERATE FREE KEY
-                            </Button>
-                        </div>
-                    </div>
-
-                    <!-- Premium Card -->
-                    <div class="group relative bg-cyan-600/5 border-2 border-cyan-500/20 p-8 rounded-[2.5rem] scale-105 z-10 shadow-2xl shadow-cyan-900/10">
-                        <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-cyan-500 text-black px-6 py-1.5 rounded-full text-[9px] font-black uppercase italic">MOST POPULAR</div>
-                        <div class="space-y-10">
-                            <div class="flex items-center justify-between">
-                                <div class="h-12 w-12 rounded-xl bg-cyan-500 flex items-center justify-center text-black shadow-[0_0_15px_rgba(6,182,212,0.5)]"><Crown class="h-6 w-6" /></div>
-                                <div class="text-right"><p class="text-3xl font-black italic text-white">$9.99</p><p class="text-[8px] font-black text-cyan-900 uppercase">Per Month</p></div>
-                            </div>
-                            <div><h3 class="text-2xl font-black italic text-white uppercase tracking-tighter">PREMIUM PLAN</h3><p class="mt-2 text-[10px] font-bold text-zinc-500 uppercase leading-relaxed text-cyan-500/70">Instant keys with no ads. dominate without waiting.</p></div>
-                            <ul class="space-y-4">
-                                {#each ['30-Day Permanent Key', 'No Ad-Links (Instant)', 'Exclusive Alpha Bypass'] as feat}
-                                    <li class="flex items-center gap-3 text-[10px] font-black uppercase tracking-widest text-white">
-                                        <div class="h-1.5 w-1.5 rounded-full bg-cyan-500 shadow-[0_0_8px_#06b6d4]"></div> {feat}
-                                    </li>
-                                {/each}
-                            </ul>
-                            <Button href="/login?plan=premium&mode=signup" class="w-full h-16 bg-cyan-500 text-black rounded-2xl text-[10px] font-black uppercase tracking-widest shadow-2xl hover:bg-cyan-400">
-                                UPGRADE TO PREMIUM
-                            </Button>
-                        </div>
-                    </div>
-
-                    <!-- Founder Card -->
-                    <div class="group relative bg-purple-600/5 border border-purple-500/20 p-8 rounded-[2.5rem] transition-all hover:bg-purple-900/10">
-                        <div class="space-y-10">
-                            <div class="flex items-center justify-between">
-                                <div class="h-12 w-12 rounded-xl bg-purple-600/10 flex items-center justify-center text-purple-500 border border-purple-500/20"><Activity class="h-6 w-6" /></div>
-                                <div class="text-right"><p class="text-3xl font-black italic text-white">$49.99</p><p class="text-[8px] font-black text-purple-900 uppercase">One-Time</p></div>
-                            </div>
-                            <div><h3 class="text-2xl font-black italic text-white uppercase tracking-tighter">FOUNDER ACCESS</h3><p class="mt-2 text-[10px] font-bold text-zinc-600 uppercase leading-relaxed">Never generate a key again. Lifetime activation.</p></div>
-                            <ul class="space-y-4">
-                                {#each ['Forever Lifetime Key', 'Early Access Bypasses', 'Exclusive VIP Badge'] as feat}
-                                    <li class="flex items-center gap-3 text-[10px] font-black uppercase tracking-widest text-zinc-500">
-                                        <div class="h-1 w-1 rounded-full bg-purple-600"></div> {feat}
-                                    </li>
-                                {/each}
-                            </ul>
-                            <Button href="/login?plan=founder&mode=signup" class="w-full h-14 bg-purple-900/20 border border-purple-500/20 text-white rounded-2xl text-[9px] font-black uppercase tracking-widest hover:bg-purple-600">
-                                UNLOCK FOUNDER STATUS
                             </Button>
                         </div>
                     </div>

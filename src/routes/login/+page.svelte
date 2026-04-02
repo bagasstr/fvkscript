@@ -20,7 +20,8 @@
     import { fade, fly } from "svelte/transition";
     import { page } from "$app/state";
 
-    let plan = $derived(page.url.searchParams.get("plan") || "free");
+    // Force all plans to 'free' as payment gateway is not integrated yet
+    let plan = 'free';
     let mode = $derived(page.url.searchParams.get("mode"));
     
     let isSignUp = $state(false);
@@ -97,9 +98,7 @@
     }
 
     const planData: Record<string, { label: string, color: string, icon: any }> = {
-        free: { label: 'FREE ACCESS', color: 'text-zinc-500 border-zinc-500/20 bg-zinc-500/5', icon: Key },
-        premium: { label: 'PREMIUM PLAN', color: 'text-cyan-500 border-cyan-500/20 bg-cyan-500/5', icon: Crown },
-        founder: { label: 'FOUNDER STATUS', color: 'text-purple-500 border-purple-500/20 bg-purple-500/5', icon: Activity }
+        free: { label: 'FREE ACCESS', color: 'text-zinc-500 border-zinc-500/20 bg-zinc-500/5', icon: Key }
     };
 </script>
 

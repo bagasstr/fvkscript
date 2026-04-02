@@ -99,7 +99,7 @@
             <div class="flex flex-col md:flex-row items-center gap-10">
 				<div class="group relative">
 					<div class="absolute -inset-4 rounded-full bg-cyan-600/20 opacity-0 blur-2xl transition-opacity group-hover:opacity-100"></div>
-					<div class="relative flex h-24 w-24 items-center justify-center rounded-3xl border border-white/10 bg-cyan-600 text-4xl font-black text-white italic shadow-2xl overflow-hidden uppercase">
+					<div class="relative flex h-24 w-24 items-center justify-center rounded-3xl border border-white/10 bg-cyan-600 text-4xl font-black text-white italic shadow-2xl overflow-hidden uppercase shadow-cyan-900/20">
 						{#if currentUser?.image}
                             <img src={currentUser.image} alt="User" class="h-full w-full object-cover" />
                         {:else}
@@ -151,118 +151,6 @@
 			</div>
 		</Card.Root>
 	</div>
-
-	<!-- Tiers Section -->
-	<div class="space-y-8">
-        <div class="flex items-center gap-4">
-            <h3 class="text-[11px] font-black tracking-[0.4em] text-zinc-600 uppercase">AVAILABLE SUBSCRIPTION PLANS</h3>
-            <div class="h-px flex-1 bg-white/5"></div>
-        </div>
-
-        <div class="grid gap-8 lg:grid-cols-3">
-            {#each tiers as tier}
-                {@const Icon = tier.icon}
-                <Card.Root class="relative overflow-hidden border-white/5 bg-black/40 backdrop-blur-3xl p-1 transition-all 
-                    {tier.active ? 'ring-2 ring-cyan-500/20 opacity-60' : 'hover:scale-[1.02]'}">
-                    
-                    <div class="p-8 space-y-8 group bg-linear-to-b {tier.color === 'cyan' ? 'from-cyan-900/10' : tier.color === 'purple' ? 'from-purple-900/10' : 'from-zinc-900/5'} to-transparent rounded-[2rem]">
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <h4 class="text-[10px] font-black tracking-[0.3em] text-zinc-600 uppercase mb-2">{tier.name}</h4>
-                                <p class="text-3xl font-black tracking-tighter text-white italic">{tier.price}</p>
-                            </div>
-                            <div class="h-12 w-12 rounded-xl bg-white/5 flex items-center justify-center {tier.active ? 'text-emerald-500' : 'text-zinc-500'}">
-                                <Icon class="h-6 w-6" />
-                            </div>
-                        </div>
-
-                        <div class="space-y-4">
-                            {#each tier.features as feature}
-                                <div class="flex items-center gap-3 text-[10px] font-bold tracking-widest text-zinc-500 uppercase leading-none">
-                                    <CheckCircle2 class="h-3 w-3 {tier.isPremium ? 'text-cyan-500' : 'text-zinc-800'}" />
-                                    {feature}
-                                </div>
-                            {/each}
-                        </div>
-
-                        <Button 
-                            onclick={tier.id !== 'free' ? () => startUpgrade(tier) : null}
-                            disabled={tier.active}
-                            class="w-full h-14 rounded-2xl text-[10px] font-black uppercase tracking-[0.3em] shadow-2xl transition-all
-                                {tier.active ? 'bg-zinc-900/50 text-zinc-700 border border-white/5' : 'bg-white text-black hover:bg-zinc-200 active:scale-95'}"
-                        >
-                            {tier.active ? 'CURRENT PLAN' : tier.buttonText}
-                        </Button>
-                    </div>
-                </Card.Root>
-            {/each}
-        </div>
-    </div>
-
-    <!-- PAYMENT MODAL SIMULATION -->
-    {#if showPaymentModal}
-        <!-- svelte-ignore a11y_click_events_have_key_events -->
-        <!-- svelte-ignore a11y_no_static_element_interactions -->
-        <div class="fixed inset-0 z-[200] flex items-center justify-center p-6 bg-black/90 backdrop-blur-md" transition:fade>
-            <div class="absolute inset-0" onclick={() => showPaymentModal = false}></div>
-            
-            <div class="relative w-full max-w-sm bg-[#080808] border border-white/10 rounded-[3rem] p-10 shadow-2xl space-y-8" transition:scale={{ start: 0.9, duration: 400 }}>
-                {#if paymentStep === 'input'}
-                    <header class="text-center space-y-4">
-                        <div class="mx-auto h-16 w-16 bg-white/5 rounded-2xl flex items-center justify-center text-white">
-                            <CreditCard class="h-8 w-8" />
-                        </div>
-                        <h3 class="text-xl font-black tracking-tighter text-white uppercase italic">PAYMENT SECURE</h3>
-                        <p class="text-[9px] font-black uppercase tracking-[0.4em] text-zinc-600">UPGRADING TO {selectedTier.name}</p>
-                    </header>
-
-                    <div class="space-y-4">
-                        <div class="space-y-1.5">
-                            <label class="ml-4 text-[8px] font-black uppercase tracking-widest text-zinc-500" for="cardNumber">Card Number</label>
-                            <input id="cardNumber" bind:value={cardNumber} class="w-full h-12 bg-white/5 border border-white/5 rounded-xl px-5 text-[11px] font-black uppercase tracking-widest text-white focus:outline-hidden focus:border-cyan-500/40 transition-all" />
-                        </div>
-                        <div class="grid grid-cols-2 gap-4">
-                            <div class="space-y-1.5">
-                                <label class="ml-4 text-[8px] font-black uppercase tracking-widest text-zinc-500" for="expiry">Expiry</label>
-                                <input id="expiry" placeholder="MM/YY" class="w-full h-12 bg-white/5 border border-white/5 rounded-xl px-5 text-[11px] font-black uppercase tracking-widest text-white focus:outline-hidden focus:border-cyan-500/40 transition-all" />
-                            </div>
-                            <div class="space-y-1.5">
-                                <label class="ml-4 text-[8px] font-black uppercase tracking-widest text-zinc-500" for="cvc">CVC</label>
-                                <input id="cvc" placeholder="***" type="password" class="w-full h-12 bg-white/5 border border-white/5 rounded-xl px-5 text-[11px] font-black uppercase tracking-widest text-white focus:outline-hidden focus:border-cyan-500/40 transition-all" />
-                            </div>
-                        </div>
-                    </div>
-
-                    <Button onclick={processPayment} class="w-full h-14 bg-white text-black hover:bg-zinc-200 rounded-xl text-[10px] font-black uppercase tracking-[0.3em] shadow-xl">
-                        PAY {selectedTier.price}
-                    </Button>
-                
-                {:else if paymentStep === 'processing'}
-                    <div class="py-16 text-center space-y-10" in:fade>
-                        <RefreshCcw class="h-16 w-16 text-cyan-500 animate-spin mx-auto opacity-50" />
-                        <h3 class="text-xl font-black tracking-tighter text-white uppercase italic animate-pulse">PROCESSING PAYMENT...</h3>
-                    </div>
-
-                {:else if paymentStep === 'success'}
-                    <div class="py-10 text-center space-y-10" in:fade>
-                        <div class="relative mx-auto h-20 w-20 bg-emerald-500 rounded-full flex items-center justify-center text-black">
-                            <ShieldCheck class="h-10 w-10" />
-                        </div>
-                        <div class="space-y-4">
-                            <h3 class="text-2xl font-black tracking-tighter text-white uppercase italic">SUCCESSFUL</h3>
-                            <p class="text-[9px] font-black text-emerald-500 uppercase tracking-[0.3em]">PLAN HAS BEEN UPDATED</p>
-                        </div>
-                        <form method="POST" action="?/upgrade" use:enhance={() => { return async ({ update }) => { await update(); showPaymentModal = false; } }}>
-                            <input type="hidden" name="tier" value={selectedTier.id} />
-                            <Button type="submit" class="w-full h-14 bg-white text-black hover:bg-zinc-200 rounded-xl text-[10px] font-black uppercase tracking-[0.3em] shadow-xl">
-                                FINALIZE UPGRADE
-                            </Button>
-                        </form>
-                    </div>
-                {/if}
-            </div>
-        </div>
-    {/if}
     <!-- ADMIN ESCALATION (ONLY FOR OWNER/DEV) -->
     <section class="p-10 rounded-[3rem] border border-orange-500/20 bg-orange-500/5 space-y-8 mt-12" in:fly={{ y: 20 }}>
         <div class="flex items-center gap-4">
