@@ -14,18 +14,9 @@ export const GET = async (event) => {
     }
 
     // --- LOOTLABS INTEGRATION ---
-    // 1. Dapatkan Creator ID Anda dari LootLabs
-    // 2. Uncomment baris di bawah ini dan ganti YOUR_LOOTLABS_ID
-    
-    /*
-    const lootLabsId = "YOUR_LOOTLABS_ID"; // Ganti dengan ID asli Anda
+    const lootLabsId = "1251248"; 
     const callbackUrl = `${event.url.origin}/api/v1/ads/callback`;
     const lootLabsUrl = `https://loot-link.com/s?id=${lootLabsId}&url=${encodeURIComponent(callbackUrl)}`;
     
     throw redirect(302, lootLabsUrl);
-    */
-
-    // MOCK: Sementara biarkan ke callback langsung untuk testing di localhost
-    // Jika sudah siap pakai LootLabs, hapus baris di bawah ini dan gunakan kode di atas.
-    throw redirect(302, "/api/v1/ads/callback");
 };
