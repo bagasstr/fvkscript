@@ -3,6 +3,7 @@ import { user, keys, activityLogs } from "$lib/server/db/schema";
 import { eq, desc } from "drizzle-orm";
 import { error, redirect } from "@sveltejs/kit";
 import { auth } from "$lib/server/auth";
+import { randomUUID } from "node:crypto";
 
 export const load = async (event) => {
     const session = await auth.api.getSession({ headers: event.request.headers });
@@ -47,7 +48,7 @@ export const actions = {
             
             // Log it
             await db.insert(activityLogs).values({
-                id: crypto.randomUUID(),
+                id: randomUUID(),
                 userId: session.user.id,
                 action: "ADMIN_REVOKE_KEY",
                 details: `Revoked key ID: ${id}`
@@ -69,7 +70,7 @@ export const actions = {
             
             // Log it
             await db.insert(activityLogs).values({
-                id: crypto.randomUUID(),
+                id: randomUUID(),
                 userId: session.user.id,
                 action: "ADMIN_ACTIVATE_KEY",
                 details: `Activated/Restored key ID: ${id}`

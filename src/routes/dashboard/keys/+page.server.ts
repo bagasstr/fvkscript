@@ -3,6 +3,7 @@ import { keys, user } from "$lib/server/db/schema";
 import { desc, eq } from "drizzle-orm";
 import { fail } from "@sveltejs/kit";
 import { auth } from "$lib/server/auth";
+import { randomUUID } from "node:crypto";
 
 export const load = async (event) => {
     const session = await auth.api.getSession({
@@ -71,7 +72,7 @@ export const actions = {
         const expiryDate = isPremium ? null : new Date(Date.now() + 24 * 60 * 60 * 1000);
 
         await db.insert(keys).values({
-            id: crypto.randomUUID(),
+            id: randomUUID(),
             userId: session.user.id,
             code: newKeyCode,
             type: userData.plan || "free",

@@ -98,11 +98,20 @@
     function handleAccess() {
         if (!selectedScript) return;
         
-        // Use the script's code or a default loader
-        const scriptCode = selectedScript.sourceCode || `loadstring(game:HttpGet("${window.location.origin}/api/v1/auth?scriptId=${selectedScript.id}"))()`;
+        const currentKey = data.userKeys?.[0];
+        let scriptCode = '';
+        
+        if (currentKey) {
+            // User had a key, provide a pre-filled loader
+            scriptCode = `_G.Key = "${currentKey.code}";\nloadstring(game:HttpGet("${window.location.origin}/api/v1/auth?scriptId=${selectedScript.id}&key=${currentKey.code}&hwid=BIND_ME"))()`;
+        } else {
+            // No key, provide a generic manual placeholder
+            scriptCode = `_G.Key = "PASTE_KEY_HERE";\nloadstring(game:HttpGet("${window.location.origin}/api/v1/auth?scriptId=${selectedScript.id}"))()`;
+        }
         
         navigator.clipboard.writeText(scriptCode);
         copied = true;
+        addToast('Loader Code Copied! ' + (currentKey ? '(Key Auto-injected)' : '(Manual Key Required)'), 'success');
         setTimeout(() => {
             copied = false;
         }, 2000);

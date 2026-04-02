@@ -2,6 +2,7 @@ import { json } from '@sveltejs/kit';
 import { db } from '$lib/server/db';
 import { keys, activityLogs, scripts, user } from '$lib/server/db/schema';
 import { eq, and } from 'drizzle-orm';
+import { randomUUID } from 'node:crypto';
 
 export const GET = async ({ url }) => {
 	let key = url.searchParams.get('key')?.trim();
@@ -62,7 +63,7 @@ export const GET = async ({ url }) => {
 
 		// 4. (Optional) Log the execution
 		await db.insert(activityLogs).values({
-			id: crypto.randomUUID(),
+			id: randomUUID(),
 			userId: targetKey.userId,
 			action: 'SCRIPT_EXECUTION',
 			details: `Script executed via loader. [Key: ${key}] [HWID: ${hwid}]`

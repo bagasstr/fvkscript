@@ -1,8 +1,9 @@
 import { db } from "$lib/server/db";
-import { scripts } from "$lib/server/db/schema";
-import { desc } from "drizzle-orm";
+import { scripts, keys } from "$lib/server/db/schema";
+import { desc, eq } from "drizzle-orm";
+import { auth } from "$lib/server/auth";
 
-export const load = async () => {
+export const load = async (event) => {
     // Fetch all scripts from the database, most recent first
     const allScripts = await db.select().from(scripts).orderBy(desc(scripts.updatedAt));
 
@@ -16,7 +17,16 @@ export const load = async () => {
         icon: script.icon || "Zap" // Default icon if none specified
     }));
 
+    const session = await auth.api.getSession({ headers: event.request.headers });
+    let userKeys: any[] = [];
+    
+    if (session?.user) {
+        userKeys = await db.select().from(keys).where(eq(keys.userId, session.user.id)).orderBy(desc(keys.createdAt));
+    }
+
     return { 
-        showcaseScripts 
+        showcaseScripts,
+        session,
+        userKeys
     };
 };

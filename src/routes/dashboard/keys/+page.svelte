@@ -13,12 +13,31 @@
 	// The current key should be the first one in the list (most recent)
 	let currentKey = $derived(data.userKeys?.[0] || null);
 
+	import { addToast } from '$lib/toast.svelte';
+	import { onMount } from 'svelte';
+	import { page } from '$app/state';
+
 	function copyToClipboard() {
 		if (!currentKey) return;
 		navigator.clipboard.writeText(currentKey.code);
 		isCopied = true;
 		setTimeout(() => (isCopied = false), 2000);
 	}
+
+    onMount(() => {
+        if (page.url.searchParams.get('verified') === 'true') {
+            addToast('Ad-Link Verified! You can now generate your key.', 'success');
+        }
+    });
+
+    $effect(() => {
+        if (form?.message) {
+            addToast(form.message, 'error');
+        }
+        if (form?.success) {
+            addToast('Protocol Key Generated Successfully!', 'success');
+        }
+    });
 </script>
 
 <div class="max-w-4xl mx-auto space-y-12 py-10" in:fade>
