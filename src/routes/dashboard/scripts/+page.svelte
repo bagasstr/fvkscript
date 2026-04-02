@@ -123,27 +123,11 @@
 
 				<div class="p-6 pt-0 flex gap-3">
 					<Button 
-						onclick={() => launchScript(script.id)}
-						disabled={loadingStates[script.id]?.includes('FETCHING')}
-						class="h-14 flex-1 rounded-2xl bg-white text-[11px] font-black uppercase tracking-[0.3em] text-black shadow-xl transition-all hover:bg-zinc-200 active:scale-95 disabled:bg-zinc-800 disabled:text-zinc-600"
+						onclick={() => copyLoader(script.id)}
+						class="h-14 flex-1 rounded-2xl bg-white text-[11px] font-black uppercase tracking-[0.3em] text-black shadow-xl transition-all hover:bg-zinc-200 active:scale-95"
 					>
-						{#if loadingStates[script.id]}
-                            {#if loadingStates[script.id].includes('FETCHING')}
-                                <RefreshCcw class="mr-2 h-4 w-4 animate-spin text-cyan-500" />
-                            {/if}
-							{loadingStates[script.id]}
-						{:else}
-							GET SCRIPT
-						{/if}
+						GET SCRIPT
 					</Button>
-                    <Button 
-                        onclick={() => copyLoader(script.id)}
-                        variant="secondary"
-                        class="h-14 px-6 rounded-2xl border border-white/5 bg-white/5 text-zinc-400 hover:text-white hover:bg-white/10 transition-all active:scale-95"
-                        title="Copy Loader Code"
-                    >
-                        <Copy class="h-4 w-4" />
-                    </Button>
 				</div>
 			</Card.Root>
 		{/each}
