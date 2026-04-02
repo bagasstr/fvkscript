@@ -256,7 +256,7 @@
 				<Button
 					type="submit"
 					disabled={loading}
-					class="group h-16 w-full rounded-2xl bg-white text-[11px] font-black tracking-[0.4em] text-black uppercase shadow-xl transition-all hover:bg-zinc-200 active:scale-95 disabled:bg-zinc-800/20 disabled:text-zinc-600"
+					class="group h-16 w-full rounded-2xl bg-white px-4 text-[11px] font-black tracking-[0.4em] text-black uppercase shadow-xl transition-all hover:bg-zinc-200 active:scale-95 disabled:bg-zinc-800/20 disabled:text-zinc-600"
 				>
 					{#if loading}
 						<RefreshCcw class="mr-2 h-4 w-4 animate-spin" />

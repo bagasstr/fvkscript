@@ -73,7 +73,7 @@
                 <Terminal class="h-3 w-3" />
                 DASHBOARD VERSION 4.02 // PROTOCOL ACTIVE
             </div>
-			<h1 class="text-6xl font-black italic tracking-tighter text-white uppercase leading-none">
+			<h1 class="text-4xl md:text-6xl font-black italic tracking-tighter text-white uppercase leading-none">
 				WELCOME,<br /><span class="text-transparent bg-clip-text bg-linear-to-r from-cyan-500 to-blue-600">{data.user?.name || 'OPERATOR'}</span>
 			</h1>
 			<p class="text-[11px] font-black uppercase tracking-[0.4em] text-zinc-600 max-w-md">
@@ -86,7 +86,7 @@
                 <p class="text-xs font-black text-white italic">99.98% STABLE</p>
             </div>
             <div class="h-16 w-px bg-white/5 mx-2 hidden sm:block"></div>
-            <Button variant="outline" href="/dashboard/settings" class="h-16 px-10 rounded-2xl border-white/5 bg-white/5 text-[10px] font-black uppercase tracking-[0.3em] text-white hover:bg-white hover:text-black transition-all">
+            <Button variant="outline" href="/dashboard/settings" class="h-16 px-6 md:px-10 rounded-2xl border-white/5 bg-white/5 text-[10px] font-black uppercase tracking-[0.3em] text-white hover:bg-white hover:text-black transition-all whitespace-nowrap">
                 MANAGE NODE
             </Button>
         </div>

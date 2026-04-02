@@ -212,7 +212,7 @@
 	<!-- Main Content Area -->
 	<div class="flex-1 h-full min-w-0 flex flex-col">
 		<!-- Top Nav -->
-		<header class="h-20 border-b border-white/5 bg-black/20 backdrop-blur-xl flex items-center justify-between px-8 lg:px-12 flex-none">
+		<header class="h-20 border-b border-white/5 bg-black/20 backdrop-blur-xl flex items-center justify-between px-4 lg:px-12 flex-none">
             <button 
                 class="lg:hidden h-10 w-10 flex items-center justify-center rounded-xl bg-white/5 text-zinc-400 active:scale-95 transition-all"
                 onclick={toggleMobileSidebar}
@@ -238,7 +238,7 @@
 		</header>
 
 		<!-- Content Scroll Area -->
-		<main class="flex-1 overflow-y-auto p-8 lg:p-12 pb-40">
+		<main class="flex-1 overflow-y-auto p-4 lg:p-12 pb-40">
 			{@render children?.()}
 		</main>
 	</div>
