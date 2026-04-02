@@ -35,6 +35,31 @@
     let showPassword = $state(false);
     let errorMessage = $state("");
 
+    function getReadableError(error: any, isRegister: boolean): string {
+        const status = error?.status;
+        const code = error?.code;
+        const msg = (error?.message || "").toLowerCase();
+
+        if (status === 409 || code === "USER_ALREADY_EXISTS" || msg.includes("already")) {
+            return "Email already registered. Please login instead.";
+        }
+        if (status === 422 || code === "VALIDATION_ERROR" || msg.includes("valid")) {
+            return "Invalid input. Check your email and password format.";
+        }
+        if (status === 400) {
+            if (msg.includes("password")) return "Password must be at least 8 characters.";
+            return "Invalid request. Please check your input.";
+        }
+        if (status === 401 || code === "INVALID_CREDENTIALS") {
+            return "Wrong email or password. Try again.";
+        }
+        if (status === 429) {
+            return "Too many attempts. Please wait a moment.";
+        }
+        if (error?.message) return error.message;
+        return isRegister ? "Registration failed. Try again." : "Login failed. Try again.";
+    }
+
     async function handleAuth() {
         loading = true;
         errorMessage = "";
@@ -47,7 +72,7 @@
                     name,
                 });
                 if (error) {
-                    errorMessage = error.message || "Registration failed. Try again.";
+                    errorMessage = getReadableError(error, true);
                     loading = false;
                     return;
                 }
@@ -59,7 +84,7 @@
                     password,
                 });
                 if (error) {
-                    errorMessage = error.message || "Invalid credentials. Try again.";
+                    errorMessage = getReadableError(error, false);
                     loading = false;
                     return;
                 }
