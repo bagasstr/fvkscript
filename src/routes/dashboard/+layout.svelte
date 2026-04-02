@@ -193,9 +193,9 @@
                         {user?.name || 'GUEST PROTO'}
                     </div>
                     <div class="flex items-center gap-1.5 mt-1.5">
-                        <div class="h-1.2 w-1.2 rounded-full {user?.plan === 'premium' ? 'bg-cyan-500' : 'bg-zinc-500'}"></div>
-                        <span class="text-[9px] font-black uppercase tracking-widest {user?.plan === 'premium' || user?.plan === 'founder' ? 'text-cyan-600' : 'text-zinc-600'}">
-                            {user?.plan?.toUpperCase() || 'FREE'} PLAN
+                        <div class="h-1.2 w-1.2 rounded-full {user?.plan === 'admin' ? 'bg-orange-500' : user?.plan === 'premium' ? 'bg-cyan-500' : user?.plan === 'founder' ? 'bg-purple-500' : 'bg-zinc-500'}"></div>
+                        <span class="text-[9px] font-black uppercase tracking-widest {user?.plan === 'admin' ? 'text-orange-500' : user?.plan === 'premium' || user?.plan === 'founder' ? 'text-cyan-600' : 'text-zinc-600'}">
+                            {user?.plan === 'founder' ? 'LIFETIME' : user?.plan?.toUpperCase() || 'FREE'} {user?.plan === 'admin' || user?.plan === 'founder' ? 'STATUS' : 'PLAN'}
                         </span>
                     </div>
                 </div>

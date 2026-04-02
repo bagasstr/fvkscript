@@ -113,8 +113,8 @@
                             {currentUser?.name || 'GUEST USER'}
                         </h3>
                     </div>
-                    <p class="text-[10px] font-black tracking-widest text-cyan-500 uppercase italic">
-                        {currentUser?.plan?.toUpperCase() || 'FREE'} {currentUser?.plan === 'founder' ? 'STATUS' : 'PLAN'} ACTIVE
+                    <p class="text-[10px] font-black tracking-widest {currentUser?.plan === 'admin' ? 'text-orange-500' : 'text-cyan-500'} uppercase italic">
+                        {currentUser?.plan === 'founder' ? 'LIFETIME' : currentUser?.plan?.toUpperCase() || 'FREE'} {currentUser?.plan === 'admin' || currentUser?.plan === 'founder' ? 'STATUS' : 'PLAN'} ACTIVE
                     </p>
 					<p class="text-[9px] font-bold tracking-widest text-zinc-600 uppercase pt-4">
 						Identity ID: {currentUser?.id?.slice(0, 12)}...
@@ -151,29 +151,4 @@
 			</div>
 		</Card.Root>
 	</div>
-    <!-- ADMIN ESCALATION (ONLY FOR OWNER/DEV) -->
-    <section class="p-10 rounded-[3rem] border border-orange-500/20 bg-orange-500/5 space-y-8 mt-12" in:fly={{ y: 20 }}>
-        <div class="flex items-center gap-4">
-            <div class="h-12 w-12 rounded-2xl bg-orange-600/10 flex items-center justify-center text-orange-500 border border-orange-500/10">
-                <ShieldAlert class="h-6 w-6" />
-            </div>
-            <div>
-                <h2 class="text-2xl font-black italic text-white uppercase tracking-tighter">DEVELOPER CONSOLE</h2>
-                <p class="text-[10px] font-bold text-zinc-600 uppercase tracking-widest mt-1">Authorized Node Promotion Utility</p>
-            </div>
-        </div>
-
-        <div class="p-6 rounded-2xl bg-black/40 border border-white/5 flex items-center justify-between transition-all hover:bg-black/60">
-            <div class="space-y-1">
-                <p class="text-xs font-black text-white uppercase tracking-widest">Admin Privileges</p>
-                <p class="text-[9px] font-bold text-zinc-600 uppercase tracking-widest">Current Status: <span class="text-orange-500">{data.currentUser?.role?.toUpperCase() || 'USER'}</span></p>
-            </div>
-            <form action="?/setRole" method="POST" use:enhance>
-                <input type="hidden" name="role" value={data.currentUser?.role === 'admin' ? 'user' : 'admin'} />
-                <Button type="submit" class="h-12 px-8 rounded-xl {data.currentUser?.role === 'admin' ? 'bg-zinc-800 text-zinc-400' : 'bg-orange-600 text-white'} text-[9px] font-black uppercase tracking-widest transition-all active:scale-95 shadow-lg shadow-orange-900/20">
-                    {data.currentUser?.role === 'admin' ? 'REVOKE ADMIN' : 'ACTIVATE ADMIN'}
-                </Button>
-            </form>
-        </div>
-    </section>
 </div>
