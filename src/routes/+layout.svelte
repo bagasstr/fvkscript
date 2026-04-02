@@ -1,6 +1,6 @@
 <script lang="ts">
 	import './layout.css';
-	import favicon from '$lib/assets/favicon.svg';
+	import favicon from '$lib/assets/favicon.png';
     import { toastState, removeToast } from '$lib/toast.svelte';
     import { fade, fly, scale } from 'svelte/transition';
     import { ShieldAlert, CheckCircle2, Info, X } from "@lucide/svelte";
