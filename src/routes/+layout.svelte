@@ -22,6 +22,21 @@
 
 <svelte:head>
     <link rel="icon" href={favicon} />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#030303" />
+    <meta name="author" content="FVKHUB" />
+    <meta name="robots" content="index, follow" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://fvkhub.vercel.app/" />
+    <meta property="og:site_name" content="FVKHUB" />
+    <meta property="og:image" content="https://fvkhub.vercel.app/og-image.png" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://fvkhub.vercel.app/" />
+    <meta name="twitter:image" content="https://fvkhub.vercel.app/og-image.png" />
 </svelte:head>
 
 <div class="relative flex flex-col min-h-screen">
