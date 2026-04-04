@@ -157,13 +157,14 @@ local function authenticate(auto)
     end
     
     local hwid = gethwid()
-    local url = API_URL .. "?key=" .. key .. "&hwid=" .. hwid
-    if SCRIPT_ID ~= "" and not SCRIPT_ID:find("^http") then
-        url = url .. "&scriptId=" .. SCRIPT_ID
-    end
+    local payload = HttpService:JSONEncode({
+        key = key,
+        hwid = hwid,
+        scriptId = (SCRIPT_ID ~= "" and not SCRIPT_ID:find("^http")) and SCRIPT_ID or nil
+    })
     
     local success, response = pcall(function()
-        return game:HttpGet(url)
+        return HttpService:PostAsync(API_URL, payload, Enum.HttpContentType.ApplicationJson)
     end)
 
     if success then

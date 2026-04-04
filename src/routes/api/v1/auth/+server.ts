@@ -4,10 +4,11 @@ import { keys, activityLogs, scripts, user } from '$lib/server/db/schema';
 import { eq, and } from 'drizzle-orm';
 import { randomUUID } from 'node:crypto';
 
-export const GET = async ({ url }) => {
-	let key = url.searchParams.get('key')?.trim();
-	const hwid = url.searchParams.get('hwid')?.trim();
-	const scriptId = url.searchParams.get('scriptId');
+export const POST = async ({ request }) => {
+	const body = await request.json();
+	const key = body.key?.trim();
+	const hwid = body.hwid?.trim();
+	const scriptId = body.scriptId;
 
 	if (!key || !hwid) {
 		return json(
@@ -80,7 +81,7 @@ export const GET = async ({ url }) => {
 			success: true,
 			tier: targetKey.type,
 			ownerId: targetKey.userId,
-			sourceCode: scriptSource, // If you want to return the code directly from the auth call
+			sourceCode: scriptSource,
 			message: 'Authentication sequence successful // Node link established.'
 		});
 	} catch (error: any) {
