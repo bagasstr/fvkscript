@@ -9,8 +9,8 @@ local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
 
 -- Configuration
-local API_URL = _G.FVK_API_URL or "http://localhost:5173/api/v1/auth"
-local GET_KEY_URL = _G.FVK_KEY_URL or "http://localhost:5173"
+local API_URL = _G.FVK_API_URL or "https://fvkscript.vercel.app/api/v1/auth"
+local GET_KEY_URL = _G.FVK_KEY_URL or "https://fvkscript.vercel.app/"
 local SCRIPT_ID = _G.FVK_SCRIPT_ID 
 
 -- GUI Creation
@@ -156,6 +156,13 @@ local function authenticate(auto)
         notify("Verifying sequence...", Color3.fromRGB(100, 200, 255))
     end
     
+    local http_request = request or http_request or (syn and syn.request) or (fluxus and fluxus.request)
+    
+    if not http_request then
+        notify("Exploit node not supported.", Color3.fromRGB(255, 100, 100))
+        return
+    end
+
     local hwid = gethwid()
     local payload = HttpService:JSONEncode({
         key = key,
@@ -164,11 +171,18 @@ local function authenticate(auto)
     })
     
     local success, response = pcall(function()
-        return HttpService:PostAsync(API_URL, payload, Enum.HttpContentType.ApplicationJson)
+        return http_request({
+            Url = API_URL,
+            Method = "POST",
+            Headers = {
+                ["Content-Type"] = "application/json"
+            },
+            Body = payload
+        })
     end)
 
     if success then
-        local data = HttpService:JSONDecode(response)
+        local data = HttpService:JSONDecode(response.Body)
         if data.success then
             notify("Access Granted! Loading module...", Color3.fromRGB(100, 255, 100))
             
