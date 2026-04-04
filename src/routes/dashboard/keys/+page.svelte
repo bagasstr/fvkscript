@@ -31,15 +31,6 @@
             addToast('Ad-Link Verified! You can now generate your key.', 'success');
         }
     });
-
-    $effect(() => {
-        if (form?.message) {
-            addToast(form.message, 'error');
-        }
-        if (form?.success) {
-            addToast('Protocol Key Generated Successfully!', 'success');
-        }
-    });
 </script>
 
 <div class="max-w-4xl mx-auto space-y-12 py-10" in:fade>
@@ -93,7 +84,7 @@
                     <div class="space-y-4">
                         <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg {!isBypassed ? 'bg-zinc-500/10 text-zinc-500' : 'bg-cyan-500/10 text-cyan-500'} text-[9px] font-black uppercase tracking-widest border border-current">
                             <ShieldCheck class="h-3 w-3" />
-                            {currentKey.type.toUpperCase()} ACCESS
+                            {currentKey.type?.toUpperCase() || 'FREE'} ACCESS
                         </div>
                         <div class="relative group/key">
                             <div class="text-4xl sm:text-5xl font-mono font-black text-white tracking-widest bg-white/5 py-8 px-6 rounded-3xl border border-white/5 break-all">
@@ -105,7 +96,7 @@
                             {#if currentKey.expiryDate}
                                 EXPIRES: <span class="text-white italic">{new Date(currentKey.expiryDate).toLocaleString()}</span>
                             {:else}
-                                STATUS: <span class="text-white italic">{currentKey.status.toUpperCase()}</span>
+                                STATUS: <span class="text-white italic">{currentKey.status?.toUpperCase() || 'ACTIVE'}</span>
                             {/if}
                         </div>
                     </div>
@@ -147,9 +138,14 @@
                             action="?/generateKey" 
                             use:enhance={() => {
                                 isGenerating = true;
-                                return async ({ update }) => {
+                                return async ({ result, update }) => {
                                     try {
                                         await update();
+                                        if (result.type === 'success') {
+                                            addToast('Protocol Key Generated Successfully!', 'success');
+                                        } else if (result.type === 'failure') {
+                                            addToast(result.data?.message || 'Failed to generate key', 'error');
+                                        }
                                     } finally {
                                         isGenerating = false;
                                     }
